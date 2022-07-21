@@ -12,14 +12,10 @@ namespace Catalog.Core.Services
     public class ProductService : IProductService
     {
         private readonly IRepository<StoreProduct> _storeProductRepository;
-        private readonly IRepository<Product> _productRepository;
-        private readonly Product _productNotFound;
 
-        public ProductService(IRepository<StoreProduct> storeProductRepository, IRepository<Product> productRepository)
+        public ProductService(IRepository<StoreProduct> storeProductRepository)
         {
             _storeProductRepository = storeProductRepository;
-            _productRepository = productRepository;
-            _productNotFound = new Product();
         }
 
         public async Task<Product?> GetProductDetail(int productid, int storeid)

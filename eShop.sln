@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiGateway", "ApiGateway\ApiGateway.csproj", "{653B7A4F-91D4-4A9F-8EBA-69DFA23F7F32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiGateway", "ApiGateway\ApiGateway.csproj", "{653B7A4F-91D4-4A9F-8EBA-69DFA23F7F32}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CEAB8EA0-41A4-4724-ACDF-51AD719A6597}"
 EndProject
@@ -19,13 +19,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{AD
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{E1430226-A315-4DDE-BC9C-84B6B4B16D8A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shopping", "Shopping", "{7D71005E-DF34-431F-B95E-F3E5C8C17700}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ShoppingCart", "ShoppingCart", "{7D71005E-DF34-431F-B95E-F3E5C8C17700}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.API", "Services\Catalog\Catalog.API\Catalog.API.csproj", "{F1C8C842-F169-4A47-B526-F96EC1C09B4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalog.API", "Services\Catalog\Catalog.API\Catalog.API.csproj", "{F1C8C842-F169-4A47-B526-F96EC1C09B4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Core", "Services\Catalog\Catalog.Core\Catalog.Core.csproj", "{D1E523B2-87F4-4A5D-B40A-06A42F0F0C0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalog.Core", "Services\Catalog\Catalog.Core\Catalog.Core.csproj", "{D1E523B2-87F4-4A5D-B40A-06A42F0F0C0E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Infrastructure", "Services\Catalog\Catalog.Infrastructure\Catalog.Infrastructure.csproj", "{07C52F09-3C21-451C-8144-28EFF268EE45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalog.Infrastructure", "Services\Catalog\Catalog.Infrastructure\Catalog.Infrastructure.csproj", "{07C52F09-3C21-451C-8144-28EFF268EE45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCart.API", "Services\ShoppingCart\ShoppingCart.API\ShoppingCart.API.csproj", "{D3DCB779-982E-4D09-8C91-267D45A9D0FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCart.Core", "Services\ShoppingCart\ShoppingCart.Core\ShoppingCart.Core.csproj", "{289F6C73-2E76-40E2-9AC1-BED462549D8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCart.Infrastructure", "Services\ShoppingCart\ShoppingCart.Infrastructure\ShoppingCart.Infrastructure.csproj", "{98A0B248-9CFF-4A05-BB87-6406D2B6B5B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +55,18 @@ Global
 		{07C52F09-3C21-451C-8144-28EFF268EE45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07C52F09-3C21-451C-8144-28EFF268EE45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07C52F09-3C21-451C-8144-28EFF268EE45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3DCB779-982E-4D09-8C91-267D45A9D0FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3DCB779-982E-4D09-8C91-267D45A9D0FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3DCB779-982E-4D09-8C91-267D45A9D0FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3DCB779-982E-4D09-8C91-267D45A9D0FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{289F6C73-2E76-40E2-9AC1-BED462549D8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{289F6C73-2E76-40E2-9AC1-BED462549D8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{289F6C73-2E76-40E2-9AC1-BED462549D8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{289F6C73-2E76-40E2-9AC1-BED462549D8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98A0B248-9CFF-4A05-BB87-6406D2B6B5B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98A0B248-9CFF-4A05-BB87-6406D2B6B5B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98A0B248-9CFF-4A05-BB87-6406D2B6B5B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98A0B248-9CFF-4A05-BB87-6406D2B6B5B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,6 +83,9 @@ Global
 		{F1C8C842-F169-4A47-B526-F96EC1C09B4F} = {E1430226-A315-4DDE-BC9C-84B6B4B16D8A}
 		{D1E523B2-87F4-4A5D-B40A-06A42F0F0C0E} = {E1430226-A315-4DDE-BC9C-84B6B4B16D8A}
 		{07C52F09-3C21-451C-8144-28EFF268EE45} = {E1430226-A315-4DDE-BC9C-84B6B4B16D8A}
+		{D3DCB779-982E-4D09-8C91-267D45A9D0FC} = {7D71005E-DF34-431F-B95E-F3E5C8C17700}
+		{289F6C73-2E76-40E2-9AC1-BED462549D8E} = {7D71005E-DF34-431F-B95E-F3E5C8C17700}
+		{98A0B248-9CFF-4A05-BB87-6406D2B6B5B6} = {7D71005E-DF34-431F-B95E-F3E5C8C17700}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {60D61642-4F14-48DC-B886-40C99FD29CC9}
