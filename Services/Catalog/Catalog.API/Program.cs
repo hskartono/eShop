@@ -2,6 +2,7 @@ using Catalog.API.Configuration;
 using Catalog.Core.Interfaces;
 using Catalog.Core.Services;
 using Catalog.Infrastructure.Data;
+using Microsoft.AspNetCore.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +25,8 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: CORS_POLICY,
         builder =>
         {
-            builder.WithOrigins(baseUrlConfig.WebBase.Replace("host.docker.internal", "localhost").TrimEnd('/'));
+            //builder.WithOrigins(baseUrlConfig.WebBase.Replace("host.docker.internal", "localhost").TrimEnd('/'));
+            builder.AllowAnyOrigin();
             builder.AllowAnyMethod();
             builder.AllowAnyHeader();
         });
@@ -45,6 +47,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseRouting();
+app.UseCors(CORS_POLICY);
 
 app.UseAuthorization();
 

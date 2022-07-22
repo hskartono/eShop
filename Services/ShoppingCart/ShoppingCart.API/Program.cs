@@ -27,7 +27,8 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: CORS_POLICY,
         builder =>
         {
-            builder.WithOrigins(baseUrlConfig.WebBase.Replace("host.docker.internal", "localhost").TrimEnd('/'));
+            //builder.WithOrigins(baseUrlConfig.WebBase.Replace("host.docker.internal", "localhost").TrimEnd('/'));
+            builder.AllowAnyOrigin();
             builder.AllowAnyMethod();
             builder.AllowAnyHeader();
         });
@@ -48,6 +49,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseRouting();
+app.UseCors(CORS_POLICY);
 
 app.UseAuthorization();
 
