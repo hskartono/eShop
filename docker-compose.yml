@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  apigateway:
+    image: ${DOCKER_REGISTRY-}apigateway
+    build:
+      context: .
+      dockerfile: ApiGateway/Dockerfile
+
+  catalog.api:
+    image: ${DOCKER_REGISTRY-}catalogapi
+    build:
+      context: .
+      dockerfile: Services/Catalog/Catalog.API/Dockerfile
+
+
+  shoppingcart.api:
+    image: ${DOCKER_REGISTRY-}shoppingcartapi
+    build:
+      context: .
+      dockerfile: Services/ShoppingCart/ShoppingCart.API/Dockerfile
+

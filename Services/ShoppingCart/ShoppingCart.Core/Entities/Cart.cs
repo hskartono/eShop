@@ -9,6 +9,9 @@ namespace ShoppingCart.Core.Entities
     public class Cart : BaseEntity
     {
         public int Id { get; set; }
+        public int StoreId { get; set; }
+        public int OwnerId { get; set; }
+
         public double Total => _items.Sum(e => e.ProductSubtotal);
         private readonly List<CartItem> _items = new List<CartItem>();
         public IReadOnlyList<CartItem> Items => _items.AsReadOnly();

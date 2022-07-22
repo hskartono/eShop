@@ -1,4 +1,5 @@
-﻿using ShoppingCart.Core.Entities;
+﻿using Microsoft.Extensions.Options;
+using ShoppingCart.Core.Entities;
 using ShoppingCart.Core.Interfaces;
 using ShoppingCart.Core.Specifications;
 using System;
@@ -13,11 +14,16 @@ namespace ShoppingCart.Core.Services
     {
         private readonly IRepository<CartItem> _cartItemRepository;
         private readonly IRepository<Cart> _cartRepository;
+        private readonly ICatalogApiClient _catalogApiClient;
+        private readonly int ownerId = 1;
 
-        public CartService(IRepository<CartItem> cartItemRepository, IRepository<Cart> cartRepository)
+        public CartService(IRepository<CartItem> cartItemRepository, 
+            IRepository<Cart> cartRepository,
+            ICatalogApiClient catalogApiClient)
         {
             _cartItemRepository = cartItemRepository;
             _cartRepository = cartRepository;
+            _catalogApiClient = catalogApiClient;
         }
 
         public async Task AddQty(int id)
@@ -35,8 +41,13 @@ namespace ShoppingCart.Core.Services
 
         public async Task Checkout(int id)
         {
-            var cart = await _cartRepository.GetByIdAsync(id);
+            var cart = await GetById(id);
             if (cart == null) return;
+
+            if (cart.Items.Count > 0)
+            {
+                await _cartItemRepository.DeleteRangeAsync(cart.Items);
+            }
 
             await _cartRepository.DeleteAsync(cart);
             await _cartRepository.SaveChangesAsync();
@@ -44,11 +55,53 @@ namespace ShoppingCart.Core.Services
 
         public async Task<Cart?> CreateCart(int productId, int storeId)
         {
-            // TODO get data product dari service Catalog
-            var product = new Product() { Id = productId, Name = "test", Description = "test desc", Package = "test package", Image = "test image", Price = 123 };
+            // load data productnya dulu
+            var product = await GetProduct(productId, storeId);
+            if (product == null) throw new Exception("Product not found");
 
-            // TODO perlu di cek apakah ada cart yang aktif, jika ada, maka tambahkan saja itemnya
-            var cart = new Cart();
+            // cek apakah user sudah memiliki cart, jika belum langsung create
+            var myCartFilter = new CartByOwnerIdSpecification(ownerId);
+            if(!await _cartRepository.AnyAsync(myCartFilter))
+            {
+                return await CreateNewCart(product, storeId);
+            }
+
+            // cek apakah cart dengan store yang sama, jika berbeda maka add
+            var myCartByStoreFilter = new CartByStoreIdSpecification(storeId, ownerId);
+            var myCart = await _cartRepository.GetBySpecAsync(myCartByStoreFilter);
+            if(myCart == null)
+            {
+                return await CreateNewCart(product, storeId);
+            }
+
+            // cek apakah item-nya ada
+            if(myCart.Items.Any(e=>e.ProductId == productId))
+            {
+                var cartItem = myCart.Items.Where(e => e.ProductId == productId).FirstOrDefault();
+                if (cartItem != null)
+                {
+                    cartItem.AddQuantity(1);
+                    await _cartItemRepository.UpdateAsync(cartItem);
+                    await _cartItemRepository.SaveChangesAsync();
+                }
+
+                return myCart;
+            }
+
+            // item belum ada, add ke dalam keranjang
+            myCart.AddItem(product);
+            await _cartRepository.UpdateAsync(myCart);
+            await _cartRepository.SaveChangesAsync();
+            return myCart;
+        }
+
+        private async Task<Cart> CreateNewCart(Product product, int storeId)
+        {
+            var cart = new Cart()
+            {
+                OwnerId = ownerId,
+                StoreId = storeId
+            };
             cart.AddItem(product);
 
             await _cartRepository.AddAsync(cart);
@@ -57,9 +110,21 @@ namespace ShoppingCart.Core.Services
             return cart;
         }
 
+        private async Task<Product?> GetProduct(int id, int storeid)
+        {
+            var product = await _catalogApiClient.GetProduct(id, storeid);
+
+            //var product = new Product() { Id = id, Name = "test", Description = "test desc", Package = "test package", Image = "test image", Price = 123 };
+
+            return product;
+        }
+
         public async Task<Cart?> GetById(int id)
         {
-            return await _cartRepository.GetByIdAsync(id);
+            var filter = new CartByIdWithItemSpecification(id);
+            var carts = await _cartRepository.ListAsync(filter);
+            if (carts == null || carts.Count == 0) return null;
+            return carts.FirstOrDefault();
         }
 
         public async Task SubQty(int id)
@@ -73,7 +138,14 @@ namespace ShoppingCart.Core.Services
             cartItem.ProductQty--;
             if (cartItem.ProductQty < 0) cartItem.ProductQty = 0;
 
-            await _cartItemRepository.UpdateAsync(cartItem);
+            if (cartItem.ProductQty == 0)
+            {
+                await _cartItemRepository.DeleteAsync(cartItem);
+            } else
+            {
+                await _cartItemRepository.UpdateAsync(cartItem);
+            }
+            
             await _cartItemRepository.SaveChangesAsync();
         }
     }

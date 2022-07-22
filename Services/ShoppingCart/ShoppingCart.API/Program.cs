@@ -1,4 +1,6 @@
+using ShoppingCart.API;
 using ShoppingCart.API.Configuration;
+using ShoppingCart.Core;
 using ShoppingCart.Core.Interfaces;
 using ShoppingCart.Core.Services;
 using ShoppingCart.Infrastructure.Data;
@@ -15,8 +17,9 @@ var configSection = builder.Configuration.GetRequiredSection(BaseUrlConfiguratio
 builder.Services.Configure<BaseUrlConfiguration>(configSection);
 var baseUrlConfig = configSection.Get<BaseUrlConfiguration>();
 
-
+builder.Services.Configure<AppSettings>(builder.Configuration);
 builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddHttpClient<ICatalogApiClient, CatalogApiClient>();
 
 const string CORS_POLICY = "CorsPolicy";
 builder.Services.AddCors(options =>

@@ -21,7 +21,9 @@ namespace ShoppingCart.API.Controllers
             if (cart == null) return NotFound();
 
             var cartDto = new CartDto();
-            foreach(var item in cart.Items)
+            cartDto.Id = cart.Id;
+            cartDto.Total = cart.Total;
+            foreach (var item in cart.Items)
             {
                 cartDto.CartItems.Add(new CartItemDto(item));
             }
@@ -35,7 +37,14 @@ namespace ShoppingCart.API.Controllers
             var result = await _cartService.CreateCart(productid, storeid);
             if (result == null) return BadRequest();
 
-            var cartDto = new CartDto();
+            var cartDto = new CartDto()
+            {
+                Id = result.Id,
+                StoreId = result.StoreId,
+                OwnerId = result.OwnerId,
+                Total = result.Total
+            };
+
             foreach (var item in result.Items)
             {
                 cartDto.CartItems.Add(new CartItemDto(item));
@@ -55,6 +64,13 @@ namespace ShoppingCart.API.Controllers
         public async Task<IActionResult> SubQty(int id)
         {
             await _cartService.SubQty(id);
+            return Ok();
+        }
+
+        [HttpGet("Checkout/{id}")]
+        public async Task<IActionResult> Checkout(int id)
+        {
+            await _cartService.Checkout(id);
             return Ok();
         }
     }

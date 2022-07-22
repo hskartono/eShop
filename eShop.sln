@@ -11,10 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateways", "ApiGateways"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGatewayBase", "ApiGatewayBase", "{352BD4DE-D8A3-42A6-845B-8AA039CC02A2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mobile.Catalog", "Mobile.Catalog", "{A7031C4D-89A3-4931-A94E-B187622EA1B0}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mobile.Shopping", "Mobile.Shopping", "{38E5A27C-2C54-40D1-A079-6A55D72681A7}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{AD8903BF-7626-40EC-98F8-CB43821C0BAD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{E1430226-A315-4DDE-BC9C-84B6B4B16D8A}"
@@ -27,11 +23,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalog.Core", "Services\Ca
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalog.Infrastructure", "Services\Catalog\Catalog.Infrastructure\Catalog.Infrastructure.csproj", "{07C52F09-3C21-451C-8144-28EFF268EE45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCart.API", "Services\ShoppingCart\ShoppingCart.API\ShoppingCart.API.csproj", "{D3DCB779-982E-4D09-8C91-267D45A9D0FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoppingCart.API", "Services\ShoppingCart\ShoppingCart.API\ShoppingCart.API.csproj", "{D3DCB779-982E-4D09-8C91-267D45A9D0FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCart.Core", "Services\ShoppingCart\ShoppingCart.Core\ShoppingCart.Core.csproj", "{289F6C73-2E76-40E2-9AC1-BED462549D8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoppingCart.Core", "Services\ShoppingCart\ShoppingCart.Core\ShoppingCart.Core.csproj", "{289F6C73-2E76-40E2-9AC1-BED462549D8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCart.Infrastructure", "Services\ShoppingCart\ShoppingCart.Infrastructure\ShoppingCart.Infrastructure.csproj", "{98A0B248-9CFF-4A05-BB87-6406D2B6B5B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoppingCart.Infrastructure", "Services\ShoppingCart\ShoppingCart.Infrastructure\ShoppingCart.Infrastructure.csproj", "{98A0B248-9CFF-4A05-BB87-6406D2B6B5B6}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{E22C0214-B1BE-4FE5-89AF-D7DF716598BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +65,10 @@ Global
 		{98A0B248-9CFF-4A05-BB87-6406D2B6B5B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98A0B248-9CFF-4A05-BB87-6406D2B6B5B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98A0B248-9CFF-4A05-BB87-6406D2B6B5B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E22C0214-B1BE-4FE5-89AF-D7DF716598BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E22C0214-B1BE-4FE5-89AF-D7DF716598BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E22C0214-B1BE-4FE5-89AF-D7DF716598BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E22C0214-B1BE-4FE5-89AF-D7DF716598BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,8 +77,6 @@ Global
 		{653B7A4F-91D4-4A9F-8EBA-69DFA23F7F32} = {352BD4DE-D8A3-42A6-845B-8AA039CC02A2}
 		{FE099F49-D1E6-48B2-9EA7-DDC9ED45C61C} = {CEAB8EA0-41A4-4724-ACDF-51AD719A6597}
 		{352BD4DE-D8A3-42A6-845B-8AA039CC02A2} = {FE099F49-D1E6-48B2-9EA7-DDC9ED45C61C}
-		{A7031C4D-89A3-4931-A94E-B187622EA1B0} = {FE099F49-D1E6-48B2-9EA7-DDC9ED45C61C}
-		{38E5A27C-2C54-40D1-A079-6A55D72681A7} = {FE099F49-D1E6-48B2-9EA7-DDC9ED45C61C}
 		{AD8903BF-7626-40EC-98F8-CB43821C0BAD} = {CEAB8EA0-41A4-4724-ACDF-51AD719A6597}
 		{E1430226-A315-4DDE-BC9C-84B6B4B16D8A} = {AD8903BF-7626-40EC-98F8-CB43821C0BAD}
 		{7D71005E-DF34-431F-B95E-F3E5C8C17700} = {AD8903BF-7626-40EC-98F8-CB43821C0BAD}

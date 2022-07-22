@@ -1,0 +1,47 @@
+version: '3.4'
+
+services:
+  catalog.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - PUBLIC_PORT=5001
+    hostname: catalog.api
+    ports:
+      - "5101:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  shoppingcart.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - PUBLIC_PORT=5002
+    hostname: shoppingcart.api
+    ports:
+      - "5102:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    links:
+      - catalog.api
+    depends_on:
+      - catalog.api
+  apigateway:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - PUBLIC_PORT=5000
+    ports:
+      - "5100:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    links:
+      - catalog.api
+      - shoppingcart.api
+
+    depends_on:
+      - catalog.api
+      - shoppingcart.api
