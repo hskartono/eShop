@@ -1,5 +1,11 @@
 # eShop
-Belajar Microservice
+Source Code ini merupakan PoC dalam proses pembelajaran membuat arsitektur Micro Services.
+Teknologi yang digunakan:
+- ASP.NET Core Menggunakan .Net 6
+- Ocelot sebagai API Gateway
+- Docker
+- Docker Compose
+- SQL Server Database
 
 ### Informasi Server Back End
 
@@ -29,3 +35,16 @@ cd eShop
 docker-compose build
 docker-compose up
 ```
+---
+
+Berikut adalah daftar Endpoint API Gateway yang dapat di hit oleh Front end untuk menjalankan proses pencarian barang, melihat detail barang, menambahkan ke dalam cart, menambah jumlah barang, mengurangi jumlah barang dan melakukan checkout.
+
+| API Endpoint | Parameter | Keterangan |
+|--------------|----------|-----------|
+| GET /product?``` q ```=&``` categoryId ```= | Parameter ``` q ``` Berisi keyword nama barang yang akan di cari. Parameter ``` categoryId ``` Berisi id kategori barang yang akan di cari. | Digunakan untuk mendapatkan daftar produk dengan filter berdasarkan nama produk atau kombinasi dengan kategori produk. |
+| GET /product/``` {productid} ```/``` {storeid} ``` | ``` {productid} ``` Berisi id produk yang akan dilihat detailnys. ``` {storeid} ``` Berisi id store lokasi dari produk yang akan dilihat detailnya. | Digunakan untuk mengambil data detail produk. |
+| GET /cart | Tanpa parameter | Mengambil data shopping cart dari user yang aktif. Jika cart belum ada, maka akan otomatis dibuat |
+| POST /add/``` {productid} ```/``` {storeid} ``` |  ``` {productid} ``` dan ``` {storeid} ``` | ``` {productid} ``` Berisi id produk yang akan ditambahkan ke cart. ``` {storeid} ``` Berisi id store sumber dari toko tempat produk dipesan. |
+| POST /addqty/``` {productid} ``` | ``` {productid} ``` | Digunakana untuk menambahkan qty dari produk yang sudah dimasukkan ke dalam cart. Jika produk belum ada, maka akan di skip. |
+| POST /subqty/``` {productid} ``` | ``` {productid} ``` | Digunakana untuk mengurangi qty dari produk yang sudah dimasukkan ke dalam cart. Jika produk belum ada, maka akan di skip. |
+| GET /checkout | Tanpa parameter | Digunakan untuk melakukan checkout shopping cart. |
