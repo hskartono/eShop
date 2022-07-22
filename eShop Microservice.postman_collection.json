@@ -1,0 +1,201 @@
+{
+	"info": {
+		"_postman_id": "7cbc020d-2e70-4dbd-98b2-dfd4e0903268",
+		"name": "eShop Microservice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3220792"
+	},
+	"item": [
+		{
+			"name": "API Gateway",
+			"item": [
+				{
+					"name": "Catalog API - Get Product List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/product",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Catalog API - Get Product By Id And Store",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/product/1/2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"product",
+								"1",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ShoppingCart API - Get Cart",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cart/8",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cart",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ShoppingCart API - Add Qty",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cart/addqty/9",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cart",
+								"addqty",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ShoppingCart API - Sub Qty",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cart/subqty/9",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cart",
+								"subqty",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ShoppingCart API - Add To Cart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cart/add/1/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cart",
+								"add",
+								"1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ShoppingCart API - Checkout",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cart/checkout/7",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cart",
+								"checkout",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Service",
+			"item": [
+				{
+					"name": "Catalog API - Get Product List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apiUrl}}/api/product",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"api",
+								"product"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://192.168.1.56:5100",
+			"type": "string"
+		},
+		{
+			"key": "apiUrl",
+			"value": "http://192.168.1.100:5101",
+			"type": "string"
+		}
+	]
+}
