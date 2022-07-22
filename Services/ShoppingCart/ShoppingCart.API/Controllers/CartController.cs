@@ -14,14 +14,16 @@ namespace ShoppingCart.API.Controllers
             _cartService = cartService;
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetCartById(int id)
+        [HttpGet()]
+        public async Task<IActionResult> GetCartById()
         {
-            var cart = await _cartService.GetById(id);
+            var cart = await _cartService.GetMyCart();
             if (cart == null) return NotFound();
 
             var cartDto = new CartDto();
             cartDto.Id = cart.Id;
+            cartDto.OwnerId = cart.OwnerId;
+            cartDto.StoreId = cart.StoreId;
             cartDto.Total = cart.Total;
             foreach (var item in cart.Items)
             {
@@ -67,10 +69,10 @@ namespace ShoppingCart.API.Controllers
             return Ok();
         }
 
-        [HttpGet("Checkout/{id}")]
-        public async Task<IActionResult> Checkout(int id)
+        [HttpGet("Checkout/")]
+        public async Task<IActionResult> Checkout()
         {
-            await _cartService.Checkout(id);
+            await _cartService.Checkout();
             return Ok();
         }
     }

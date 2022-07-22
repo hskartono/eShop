@@ -27,9 +27,9 @@
       ]
     },
     {
-      "UpstreamPathTemplate": "/cart/{id}",
+      "UpstreamPathTemplate": "/cart",
       "UpstreamHttpMethod": [ "Get" ],
-      "DownstreamPathTemplate": "/api/cart/{id}",
+      "DownstreamPathTemplate": "/api/cart",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -75,9 +75,9 @@
       ]
     },
     {
-      "UpstreamPathTemplate": "/checkout/{id}",
+      "UpstreamPathTemplate": "/cart/checkout",
       "UpstreamHttpMethod": [ "Get" ],
-      "DownstreamPathTemplate": "/api/cart/checkout/{id}",
+      "DownstreamPathTemplate": "/api/cart/checkout",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {

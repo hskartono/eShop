@@ -28,7 +28,7 @@ namespace ShoppingCart.Core.Services
 
         public async Task AddQty(int id)
         {
-            var specification = new CartItemByIdWithCartSpecification(id);
+            var specification = new MyCartItemByProductIdSpecification(ownerId, id);
             var cartItems = await _cartItemRepository.ListAsync(specification);
             if (cartItems == null || cartItems.Count == 0)
                 return;
@@ -39,9 +39,15 @@ namespace ShoppingCart.Core.Services
             await _cartItemRepository.UpdateAsync(cartItem);
         }
 
-        public async Task Checkout(int id)
+        public async Task Checkout()
         {
-            var cart = await GetById(id);
+            // checkout belum ada proses apapun, sehingga disini hanya delete cart saja
+            await DeleteMyCart();
+        }
+
+        private async Task DeleteMyCart()
+        {
+            var cart = await GetMyCart();
             if (cart == null) return;
 
             if (cart.Items.Count > 0)
@@ -66,12 +72,14 @@ namespace ShoppingCart.Core.Services
                 return await CreateNewCart(product, storeId);
             }
 
-            // cek apakah cart dengan store yang sama, jika berbeda maka add
+            // cek apakah cart dengan store yang sama, jika berbeda maka hapus cart lama dan buat cart baru
             var myCartByStoreFilter = new CartByStoreIdSpecification(storeId, ownerId);
             var myCart = await _cartRepository.GetBySpecAsync(myCartByStoreFilter);
             if(myCart == null)
             {
-                return await CreateNewCart(product, storeId);
+                await DeleteMyCart();
+                myCart = await CreateNewCart(product, storeId);
+                return myCart;
             }
 
             // cek apakah item-nya ada
@@ -129,7 +137,7 @@ namespace ShoppingCart.Core.Services
 
         public async Task SubQty(int id)
         {
-            var specification = new CartItemByIdWithCartSpecification(id);
+            var specification = new MyCartItemByProductIdSpecification(ownerId, id);
             var cartItems = await _cartItemRepository.ListAsync(specification);
             if (cartItems == null || cartItems.Count == 0)
                 return;
@@ -147,6 +155,21 @@ namespace ShoppingCart.Core.Services
             }
             
             await _cartItemRepository.SaveChangesAsync();
+        }
+
+        public async Task<Cart> GetMyCart()
+        {
+            var filter = new CartByOwnerIdSpecification(ownerId);
+            var cart = await _cartRepository.GetBySpecAsync(filter);
+            if (cart != null)
+                return cart;
+
+            cart = new Cart()
+            {
+                OwnerId = ownerId
+            };
+            await _cartRepository.AddAsync(cart);
+            return cart;
         }
     }
 }

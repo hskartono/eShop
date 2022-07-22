@@ -32,13 +32,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/product/1/2",
+							"raw": "{{baseUrl}}/product/10/2",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"product",
-								"1",
+								"10",
 								"2"
 							]
 						}
@@ -46,95 +46,93 @@
 					"response": []
 				},
 				{
-					"name": "ShoppingCart API - Get Cart",
+					"name": "ShoppingCart API - Get My Cart",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/cart/8",
+							"raw": "{{baseUrl}}/cart",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"cart",
-								"8"
+								"cart"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "ShoppingCart API - Add Qty",
+					"name": "ShoppingCart API - Add Qty For Specific Product In Cart",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/cart/addqty/9",
+							"raw": "{{baseUrl}}/cart/addqty/4",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"cart",
 								"addqty",
-								"9"
+								"4"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "ShoppingCart API - Sub Qty",
+					"name": "ShoppingCart API - Sub Qty For Specific Product In Cart",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/cart/subqty/9",
+							"raw": "{{baseUrl}}/cart/subqty/4",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"cart",
 								"subqty",
-								"9"
+								"4"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "ShoppingCart API - Add To Cart",
+					"name": "ShoppingCart API - Add Product To Cart",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/cart/add/1/1",
+							"raw": "{{baseUrl}}/cart/add/4/3",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"cart",
 								"add",
-								"1",
-								"1"
+								"4",
+								"3"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "ShoppingCart API - Checkout",
+					"name": "ShoppingCart API - Checkout My Cart",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/cart/checkout/7",
+							"raw": "{{baseUrl}}/cart/checkout",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"cart",
-								"checkout",
-								"7"
+								"checkout"
 							]
 						}
 					},
@@ -189,7 +187,7 @@
 	"variable": [
 		{
 			"key": "baseUrl",
-			"value": "http://192.168.1.56:5100",
+			"value": "http://192.168.1.100:5100",
 			"type": "string"
 		},
 		{

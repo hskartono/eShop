@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace ShoppingCart.Core.Specifications
 {
-    public class CartByOwnerIdSpecification : Specification<Cart>
+    public class MyCartItemByProductIdSpecification : Specification<CartItem>
     {
-        public CartByOwnerIdSpecification(int id)
+        public MyCartItemByProductIdSpecification(int ownerId, int productId)
         {
             Query
-                .Where(e => e.OwnerId == id)
-                .Include(e => e.Items);
+                .Where(e => e.ProductId == productId && e.Cart.OwnerId == ownerId)
+                .Include(e => e.Cart);
         }
     }
 }

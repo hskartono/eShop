@@ -11,8 +11,9 @@ namespace ShoppingCart.Core.Interfaces
     {
         Task<Cart?> CreateCart(int productId, int storeId);
         Task<Cart?> GetById(int id);
+        Task<Cart> GetMyCart();
         Task AddQty(int id);
         Task SubQty(int id);
-        Task Checkout(int id);
+        Task Checkout();
     }
 }
