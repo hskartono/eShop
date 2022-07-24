@@ -44,7 +44,7 @@ Berikut adalah daftar Endpoint API Gateway yang dapat di hit oleh Front end untu
 | GET /product?``` q ```=&``` categoryId ```= | Parameter ``` q ``` Berisi keyword nama barang yang akan di cari. Parameter ``` categoryId ``` Berisi id kategori barang yang akan di cari. | Digunakan untuk mendapatkan daftar produk dengan filter berdasarkan nama produk atau kombinasi dengan kategori produk. |
 | GET /product/``` {productid} ```/``` {storeid} ``` | ``` {productid} ``` Berisi id produk yang akan dilihat detailnys. ``` {storeid} ``` Berisi id store lokasi dari produk yang akan dilihat detailnya. | Digunakan untuk mengambil data detail produk. |
 | GET /cart | Tanpa parameter | Mengambil data shopping cart dari user yang aktif. Jika cart belum ada, maka akan otomatis dibuat |
-| POST /add/``` {productid} ```/``` {storeid} ``` |  ``` {productid} ``` dan ``` {storeid} ``` | ``` {productid} ``` Berisi id produk yang akan ditambahkan ke cart. ``` {storeid} ``` Berisi id store sumber dari toko tempat produk dipesan. |
-| POST /addqty/``` {productid} ``` | ``` {productid} ``` | Digunakana untuk menambahkan qty dari produk yang sudah dimasukkan ke dalam cart. Jika produk belum ada, maka akan di skip. |
-| POST /subqty/``` {productid} ``` | ``` {productid} ``` | Digunakana untuk mengurangi qty dari produk yang sudah dimasukkan ke dalam cart. Jika produk belum ada, maka akan di skip. |
-| GET /checkout | Tanpa parameter | Digunakan untuk melakukan checkout shopping cart. |
+| POST /cart/add/``` {productid} ```/``` {storeid} ``` |  ``` {productid} ``` dan ``` {storeid} ``` | ``` {productid} ``` Berisi id produk yang akan ditambahkan ke cart. ``` {storeid} ``` Berisi id store sumber dari toko tempat produk dipesan. |
+| POST /cart/addqty/``` {productid} ``` | ``` {productid} ``` | Digunakana untuk menambahkan qty dari produk yang sudah dimasukkan ke dalam cart. Jika produk belum ada, maka akan di skip. |
+| POST /cart/subqty/``` {productid} ``` | ``` {productid} ``` | Digunakana untuk mengurangi qty dari produk yang sudah dimasukkan ke dalam cart. Jika produk belum ada, maka akan di skip. |
+| GET /cart/checkout | Tanpa parameter | Digunakan untuk melakukan checkout shopping cart. |
