@@ -14,6 +14,7 @@ namespace ShoppingCart.API.Controllers
             Id = item.Id;
             ProductId = item.ProductId;
             ProductName = item.ProductName;
+            ProductImage = item.ProductImage;
             ProductPrice = item.ProductPrice;
             ProductQty = item.ProductQty;
             ProductSubtotal = item.ProductSubtotal;
@@ -22,6 +23,7 @@ namespace ShoppingCart.API.Controllers
         public int Id { get; set; }
         public int ProductId { get; set; }
         public string ProductName { get; set; } = string.Empty;
+        public string ProductImage { get; set; } = string.Empty;
         public double ProductPrice { get; set; }
         public int ProductQty { get; set; }
         public double ProductSubtotal { get; set; }

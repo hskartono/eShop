@@ -16,6 +16,7 @@ namespace ShoppingCart.Core.Entities
         {
             ProductId = product.Id;
             ProductName = product.Name;
+            ProductImage = product.Image;
             ProductPrice = product.Price;
             ProductQty = 1;
         }
@@ -28,6 +29,7 @@ namespace ShoppingCart.Core.Entities
         public double ProductSubtotal => ProductPrice * ProductQty;
         public int? CartId { get; set; }
         public Cart? Cart { get; set; }
+        public string ProductImage { get; set; }
 
         public void AddQuantity(int quantity)
         {
