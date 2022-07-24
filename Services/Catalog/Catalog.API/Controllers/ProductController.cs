@@ -23,6 +23,9 @@ namespace Catalog.API.Controllers
             if (item is null)
                 return NotFound();
 
+            var hostname = Request.Host.Host;
+            var port = Request.Host.Port;
+
             var result = new ProductDto()
             {
                 Id = item.Id,
@@ -30,7 +33,8 @@ namespace Catalog.API.Controllers
                 Package = item.Package,
                 Image = item.Image,
                 Description = item.Description,
-                Price = item.Price
+                Price = item.Price,
+                HostName = $"{hostname}:{port}"
             };
 
             return Ok(result);
@@ -56,6 +60,7 @@ namespace Catalog.API.Controllers
                 }
             }
 
+            var hostname = System.Net.Dns.GetHostName();
             var productStores = await _productService.SerchProductWithCategory(q, categoryId);
 
             // kelompokkan per store
@@ -82,7 +87,8 @@ namespace Catalog.API.Controllers
                 {
                     Id = storeProduct.Id,
                     StoreName = (storeProduct.Store == null) ? "Unknown" : storeProduct.Store.Name,
-                    Products = new List<ProductDto>()
+                    Products = new List<ProductDto>(),
+                    HostName = hostname
                 };
 
                 foreach(var productStore in dict[storeProduct.Id])

@@ -13,6 +13,18 @@ services:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
 
+  catalog.api2:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - PUBLIC_PORT=5001
+    hostname: catalog.api2
+    ports:
+      - "5103:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
   shoppingcart.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -26,8 +38,11 @@ services:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
     links:
       - catalog.api
+      - catalog.api2
     depends_on:
       - catalog.api
+      - catalog.api2
+
   apigateway:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -40,8 +55,10 @@ services:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
     links:
       - catalog.api
+      - catalog.api2
       - shoppingcart.api
 
     depends_on:
       - catalog.api
+      - catalog.api2
       - shoppingcart.api

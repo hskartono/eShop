@@ -11,8 +11,15 @@
         {
           "Host": "catalog.api",
           "Port": 80
+        },
+        {
+          "Host": "catalog.api2",
+          "Port": 80
         }
-      ]
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      }
     },
     {
       "UpstreamPathTemplate": "/product",
@@ -23,8 +30,15 @@
         {
           "Host": "catalog.api",
           "Port": 80
+        },
+        {
+          "Host": "catalog.api2",
+          "Port": 80
         }
-      ]
+      ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
     },
     {
       "UpstreamPathTemplate": "/cart",
