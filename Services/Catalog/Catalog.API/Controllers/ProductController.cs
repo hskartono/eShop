@@ -68,13 +68,13 @@ namespace Catalog.API.Controllers
             var dicParent = new Dictionary<int, StoreProduct>();
             foreach(var item in productStores)
             {
-                if (!dict.ContainsKey(item.Id))
+                if (!dict.ContainsKey(item.StoreId.Value))
                 {
-                    dict.Add(item.Id, new List<StoreProduct>());
-                    dicParent.Add(item.Id, item);
+                    dict.Add(item.StoreId.Value, new List<StoreProduct>());
+                    dicParent.Add(item.StoreId.Value, item);
                 }
 
-                dict[item.Id].Add(item);
+                dict[item.StoreId.Value].Add(item);
             }
 
             var result = new List<StoreProductDto>();
@@ -85,13 +85,13 @@ namespace Catalog.API.Controllers
                 var storeProduct = dicParent[id];
                 var item = new StoreProductDto()
                 {
-                    Id = storeProduct.Id,
+                    Id = id,
                     StoreName = (storeProduct.Store == null) ? "Unknown" : storeProduct.Store.Name,
                     Products = new List<ProductDto>(),
                     HostName = hostname
                 };
 
-                foreach(var productStore in dict[storeProduct.Id])
+                foreach(var productStore in dict[id])
                 {
                     var product = productStore.Product;
                     item.Products.Add(new ProductDto()
