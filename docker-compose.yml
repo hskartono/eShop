@@ -6,22 +6,31 @@ services:
     build:
       context: .
       dockerfile: ApiGateway/Dockerfile
+    container_name: apigateway
 
   catalog.api:
     image: ${DOCKER_REGISTRY-}catalogapi
     build:
       context: .
       dockerfile: Services/Catalog/Catalog.API/Dockerfile
+    container_name: catalog.api
 
   catalog.api2:
     image: ${DOCKER_REGISTRY-}catalogapi2
     build:
       context: .
       dockerfile: Services/Catalog/Catalog.API/Dockerfile
+    container_name: catalog.api2
 
   shoppingcart.api:
     image: ${DOCKER_REGISTRY-}shoppingcartapi
     build:
       context: .
       dockerfile: Services/ShoppingCart/ShoppingCart.API/Dockerfile
+    container_name: shoppingcart.api
 
+  consul:
+    image: consul:latest
+    command: consul agent -dev -log-level=warn -ui -client=0.0.0.0
+    hostname: consul
+    container_name: consul

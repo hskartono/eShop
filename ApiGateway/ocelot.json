@@ -1,5 +1,10 @@
 {
   "GlobalConfiguration": {
+    "ServiceDiscoveryProvider": {
+      "Host": "consul",
+      "Port": 8500,
+      "Type": "Consul"
+    }
   },
   "Routes": [
     {
@@ -7,16 +12,7 @@
       "UpstreamHttpMethod": [ "Get" ],
       "DownstreamPathTemplate": "/api/product/{productid}/{storeid}",
       "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "catalog.api",
-          "Port": 80
-        },
-        {
-          "Host": "catalog.api2",
-          "Port": 80
-        }
-      ],
+      "ServiceName": "product.api",
       "LoadBalancerOptions": {
         "Type": "RoundRobin"
       }
@@ -26,16 +22,7 @@
       "UpstreamHttpMethod": [ "Get" ],
       "DownstreamPathTemplate": "/api/product",
       "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "catalog.api",
-          "Port": 80
-        },
-        {
-          "Host": "catalog.api2",
-          "Port": 80
-        }
-      ],
+      "ServiceName": "product.api",
       "LoadBalancerOptions": {
         "Type": "LeastConnection"
       }
@@ -45,60 +32,35 @@
       "UpstreamHttpMethod": [ "Get" ],
       "DownstreamPathTemplate": "/api/cart",
       "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "shoppingcart.api",
-          "Port": 80
-        }
-      ]
+      "ServiceName": "shoppingcart.api"
     },
     {
       "UpstreamPathTemplate": "/cart/{productid}/{storeid}",
       "UpstreamHttpMethod": [ "Post" ],
       "DownstreamPathTemplate": "/api/cart/{productid}/{storeid}",
       "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "shoppingcart.api",
-          "Port": 80
-        }
-      ]
+      "ServiceName": "shoppingcart.api"
     },
     {
       "UpstreamPathTemplate": "/cart/addqty/{id}",
       "UpstreamHttpMethod": [ "Post" ],
       "DownstreamPathTemplate": "/api/cart/addqty/{id}",
       "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "shoppingcart.api",
-          "Port": 80
-        }
-      ]
+      "ServiceName": "shoppingcart.api"
     },
     {
       "UpstreamPathTemplate": "/cart/subqty/{id}",
       "UpstreamHttpMethod": [ "Post" ],
       "DownstreamPathTemplate": "/api/cart/subqty/{id}",
       "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "shoppingcart.api",
-          "Port": 80
-        }
-      ]
+      "ServiceName": "shoppingcart.api"
     },
     {
       "UpstreamPathTemplate": "/cart/checkout",
       "UpstreamHttpMethod": [ "Get" ],
       "DownstreamPathTemplate": "/api/cart/checkout",
       "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "shoppingcart.api",
-          "Port": 80
-        }
-      ]
+      "ServiceName": "shoppingcart.api"
     }
   ]
 }

@@ -5,31 +5,47 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
-      - PUBLIC_PORT=5001
+      - PUBLIC_PORT=5101
+      - ServiceConfig__serviceDiscoveryAddress=http://consul:8500
+      - ServiceConfig__serviceAddress=http://catalog.api:80
+      - ServiceConfig__serviceName=product.api
+      - ServiceConfig__serviceId=product.api-v1
     hostname: catalog.api
     ports:
       - "5101:80"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+      - consul
 
   catalog.api2:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
-      - PUBLIC_PORT=5001
+      - PUBLIC_PORT=5103
+      - ServiceConfig__serviceDiscoveryAddress=http://consul:8500
+      - ServiceConfig__serviceAddress=http://catalog.api2:80
+      - ServiceConfig__serviceName=product.api
+      - ServiceConfig__serviceId=product.api-v2
     hostname: catalog.api2
     ports:
       - "5103:80"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+      - consul
 
   shoppingcart.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
-      - PUBLIC_PORT=5002
+      - PUBLIC_PORT=5102
+      - ServiceConfig__serviceDiscoveryAddress=http://consul:8500
+      - ServiceConfig__serviceAddress=http://shoppingcart.api:80
+      - ServiceConfig__serviceName=shoppingcart.api
+      - ServiceConfig__serviceId=shoppingcart.api-v1
     hostname: shoppingcart.api
     ports:
       - "5102:80"
@@ -42,12 +58,13 @@ services:
     depends_on:
       - catalog.api
       - catalog.api2
+      - consul
 
   apigateway:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
-      - PUBLIC_PORT=5000
+      - PUBLIC_PORT=5100
     ports:
       - "5100:80"
     volumes:
@@ -62,3 +79,8 @@ services:
       - catalog.api
       - catalog.api2
       - shoppingcart.api
+      - consul
+
+  consul:
+    ports:
+      - "8500:8500"

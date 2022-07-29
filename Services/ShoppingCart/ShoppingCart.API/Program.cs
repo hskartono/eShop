@@ -1,3 +1,4 @@
+using Infrastructure.ServiceDiscovery;
 using ShoppingCart.API;
 using ShoppingCart.API.Configuration;
 using ShoppingCart.Core;
@@ -8,6 +9,9 @@ using ShoppingCart.Infrastructure.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 ShoppingCart.Infrastructure.Dependencies.ConfigureServices(builder.Configuration, builder.Services);
+
+var serviceConfig = builder.Configuration.GetServiceConfig();
+builder.Services.RegisterConsulServices(serviceConfig);
 
 // Add services to the container.
 builder.Services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
