@@ -12,7 +12,7 @@
       "UpstreamHttpMethod": [ "Get" ],
       "DownstreamPathTemplate": "/api/product/{productid}/{storeid}",
       "DownstreamScheme": "http",
-      "ServiceName": "product.api",
+      "ServiceName": "catalog.api",
       "LoadBalancerOptions": {
         "Type": "RoundRobin"
       }
@@ -22,7 +22,7 @@
       "UpstreamHttpMethod": [ "Get" ],
       "DownstreamPathTemplate": "/api/product",
       "DownstreamScheme": "http",
-      "ServiceName": "product.api",
+      "ServiceName": "catalog.api",
       "LoadBalancerOptions": {
         "Type": "LeastConnection"
       }

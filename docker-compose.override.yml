@@ -8,7 +8,7 @@ services:
       - PUBLIC_PORT=5101
       - ServiceConfig__serviceDiscoveryAddress=http://consul:8500
       - ServiceConfig__serviceAddress=http://catalog.api:80
-      - ServiceConfig__serviceName=product.api
+      - ServiceConfig__serviceName=catalog.api
       - ServiceConfig__serviceId=product.api-v1
     hostname: catalog.api
     ports:
@@ -26,7 +26,7 @@ services:
       - PUBLIC_PORT=5103
       - ServiceConfig__serviceDiscoveryAddress=http://consul:8500
       - ServiceConfig__serviceAddress=http://catalog.api2:80
-      - ServiceConfig__serviceName=product.api
+      - ServiceConfig__serviceName=catalog.api
       - ServiceConfig__serviceId=product.api-v2
     hostname: catalog.api2
     ports:
